@@ -9,7 +9,7 @@ import { phone, phoneLink, whatsapp } from '@/lib/contact'
 
 export const Route = createFileRoute('/products/$productId')({
   loader: ({ params }) => { const product = products.find(item => item.id === Number(params.productId)); if (!product) throw notFound(); return product },
-  head: ({ loaderData }) => ({ meta: [{ title: `${loaderData?.name || 'Materials'} | Royalconstructionmaterials` }, { name: 'description', content: loaderData?.description || 'Explore quality construction materials from Royal.' }] }),
+  head: ({ loaderData }) => ({ meta: [{ title: `${loaderData?.name || 'Materials'} | Royal Construction Materials` }, { name: 'description', content: loaderData?.description || 'Explore quality construction materials from Royal.' }] }),
   component: ProductPage,
   notFoundComponent: () => <div className="empty-results container"><h1>That material isn’t in our catalogue.</h1><p>Let’s help you find the right materials for your project.</p><Link className="button button-gold" to="/products" search={{ search: '' }}>Browse materials <ArrowRight size={18} /></Link></div>,
 })

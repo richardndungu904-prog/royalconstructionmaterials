@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { ReactNode, FormEvent } from 'react'
 import { ArrowRight, Check, ChevronRight, Crown, Facebook, Mail, MapPin, Menu, MessageCircle, Minus, Phone, Plus, Search, ShoppingBag, Trash2, X } from 'lucide-react'
 import { imageUrl, money, photo } from '@/data/products'
-import { email, facebook, mapsLink, phone, phoneLink, whatsapp } from '@/lib/contact'
+import { email, facebook, mapsLink, phone, phoneLink, whatsapp, whatsappNumber } from '@/lib/contact'
 import { CartProvider, useCart } from './CartProvider'
 
 export function SiteLayout({ children }: { children: ReactNode }) {
@@ -11,7 +11,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 }
 
 function Brand() {
-  return <Link to="/" className="brand" aria-label="Royalconstructionmaterials home"><img src={imageUrl(photo(152), 100)} alt="Royal Construction Materials crown logo" /><span><strong>ROYAL<span className="brand-dot">.</span></strong><small>CONSTRUCTION MATERIALS</small></span></Link>
+  return <Link to="/" className="brand" aria-label="Royal Construction Materials home"><img src={imageUrl(photo(152), 160)} alt="Royal Construction Materials logo" width={56} height={56} /><span><strong>ROYAL</strong><small>CONSTRUCTION MATERIALS</small></span></Link>
 }
 
 function Header() {
@@ -23,7 +23,7 @@ function Header() {
   function submit(event: FormEvent) { event.preventDefault(); setSearch(false); setMenu(false); void navigate({ to: '/products', search: { search: query } }) }
   return <>
     <a className="skip-link" href="#main-content">Skip to content</a>
-    <div className="topbar"><div className="container"><a href={mapsLink} target="_blank" rel="noreferrer"><MapPin size={13} /> Nakuru Pipeline, Kenya</a><span className="topbar-center">Quality materials. Honest prices. Royal service.</span><a href={phoneLink}><Phone size={13} /> Let’s talk: <strong>{phone}</strong></a></div></div>
+    <div className="topbar"><div className="container"><a href={mapsLink} target="_blank" rel="noreferrer"><MapPin size={13} /> Nakuru Pipeline, Kenya</a><span className="topbar-center">Quality materials. Honest prices. Royal service.</span><span className="topbar-contacts"><a href={phoneLink}><Phone size={13} /> Call: <strong>{phone}</strong></a><a href={whatsapp()} target="_blank" rel="noreferrer"><MessageCircle size={13} /> WhatsApp: <strong>{whatsappNumber}</strong></a></span></div></div>
     <header className="site-header"><div className="container header-inner"><Brand /><nav className={menu ? 'navigation expanded' : 'navigation'} aria-label="Main navigation">
       <Link to="/" onClick={() => setMenu(false)} activeProps={{ className: 'active' }} activeOptions={{ exact: true }}>Home</Link>
       <Link to="/products" search={{ search: '' }} onClick={() => setMenu(false)} activeProps={{ className: 'active' }}>Shop materials</Link>
@@ -37,11 +37,11 @@ function Header() {
 }
 
 export function Footer() {
-  return <footer className="site-footer"><div className="container footer-grid"><div><Brand /><p>From your first sheet to your final finish.<br />Your building partner in Nakuru and beyond.</p><a href={facebook} target="_blank" rel="noreferrer" className="social-link" aria-label="Find Royal Construction Materials on Facebook"><Facebook size={17} /></a></div><div><h3>Build with Royal</h3><Link to="/products" search={{ search: '' }}>Shop all materials</Link><Link to="/price-list">Our price list</Link><Link to="/quotation">Request a quotation</Link><Link to="/about">Our story</Link></div><div><h3>Talk to a real person</h3><a href={phoneLink}><Phone size={15} /> {phone}</a><a href={whatsapp()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp our sales team</a><a href={`mailto:${email}`} className="footer-email"><Mail size={15} /> {email}</a></div><div><h3>Find us</h3><p>Nakuru Pipeline, Kenya<br />P.O. Box 05644<br />Nakuru 20100</p><a href={mapsLink} target="_blank" rel="noreferrer">Get directions <ArrowRight size={15} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Royalconstructionmaterials. Built on quality.</span><span>No online payments. Every order is confirmed with our sales team.</span></div></footer>
+  return <footer className="site-footer"><div className="container footer-grid"><div><Brand /><p>From your first sheet to your final finish.<br />Your building partner in Nakuru and beyond.</p><a href={facebook} target="_blank" rel="noreferrer" className="social-link" aria-label="Find Royal Construction Materials on Facebook"><Facebook size={17} /></a></div><div><h3>Build with Royal</h3><Link to="/products" search={{ search: '' }}>Shop all materials</Link><Link to="/price-list">Our price list</Link><Link to="/quotation">Request a quotation</Link><Link to="/about">Our story</Link></div><div><h3>Talk to a real person</h3><a href={phoneLink}><Phone size={15} /> {phone}</a><a href={whatsapp()} target="_blank" rel="noreferrer"><MessageCircle size={15} /> WhatsApp: {whatsappNumber}</a><a href={facebook} target="_blank" rel="noreferrer"><Facebook size={15} /> Facebook</a><a href={`mailto:${email}`} className="footer-email"><Mail size={15} /> {email}</a></div><div><h3>Find us</h3><p>Nakuru Pipeline, Kenya<br />P.O. Box 05644<br />Nakuru 20100</p><a href={mapsLink} target="_blank" rel="noreferrer">Get directions <ArrowRight size={15} /></a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Royal Construction Materials. Built on quality.</span><span>No online payments. Every order is confirmed with our sales team.</span></div></footer>
 }
 
 function FloatingContact() {
-  return <aside className="floating-contact" aria-label="Quick contact"><a href={phoneLink} aria-label="Call our sales team" className="floating-phone"><Phone size={19} /></a><a href={whatsapp()} target="_blank" rel="noreferrer" className="floating-whatsapp"><MessageCircle size={22} /><span>Let’s talk</span><span className="online-dot" /></a></aside>
+  return <aside className="floating-contact" aria-label="Quick contact"><a href={phoneLink} aria-label={`Call our sales team on ${phone}`} className="floating-phone"><Phone size={19} /></a><a href={whatsapp()} target="_blank" rel="noreferrer" className="floating-whatsapp" aria-label={`WhatsApp our sales team on ${whatsappNumber}`}><MessageCircle size={22} /><span>WhatsApp us</span><span className="online-dot" /></a></aside>
 }
 
 function Toast() {

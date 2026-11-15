@@ -9,7 +9,7 @@ export const Route = createFileRoute('/price-list')({ component: PriceList })
 function PriceList() {
   function download() {
     const rows = [['Material', 'Price (KSh)', 'Unit', 'Grade'], ...products.map(product => [product.name, product.price === null ? 'Request quotation' : String(product.price), product.unit, product.grade])]
-    const csv = `${rows.map(row => row.map(value => `"${value.replaceAll('"', '""')}"`).join(',')).join('\r\n')}\r\n"Prices are indicative. Confirm specifications, stock and delivery with Royal sales: +254 752 550277."`
+    const csv = `${rows.map(row => row.map(value => `"${value.replaceAll('"', '""')}"`).join(',')).join('\r\n')}\r\n"Prices are indicative. Confirm specifications, stock and delivery with Royal sales. Call +254 752 550277 or WhatsApp +254 789 897713."`
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }))
     const anchor = document.createElement('a'); anchor.href = url; anchor.download = 'Royal-Construction-Materials-Price-List.csv'; anchor.click(); URL.revokeObjectURL(url)
   }
